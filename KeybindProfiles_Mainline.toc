@@ -1,5 +1,5 @@
 ## Title: Keybind Profiles
-## Version: 2
+## Version: 2.0.0
 ## Author: Alzar
 ## Category: Utilities
 ## Interface: 120001
