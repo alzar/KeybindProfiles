@@ -1,12 +1,26 @@
-## Title: |cffFF0000Keyind|r |cffffffffProfiles|r
-## Version: v1.0.2
+## Title: Keybind Profiles
+## Version: 2
 ## Author: Alzar
-## Interface: 100002
-## X-Interface: 100002
-## SavedVariables: BindProfilesDB_Global
-## Notes: Allows creation of keybind profiles allowing quick keybind changing
+## Category: Utilities
+## Interface: 120001
+## X-Interface: 120001
+## Notes: Create named keybind profiles with specialization-based auto loading
+## SavedVariables: KeybindProfilesDB, BindProfilesDB_Global
+## IconTexture: Interface\ICONS\ability_bastion_druid.tga
 
-embeds.xml
-locales.xml
 KeybindProfiles.lua
-KeybindProfiles.xml
+Core\Constants.lua
+locale\enUS.lua
+Core\Database.lua
+Core\Transfer.lua
+Core\Migration.lua
+Core\Bindings.lua
+Core\Context.lua
+Core\Rules.lua
+Core\Controller.lua
+Core\Events.lua
+Core\Slash.lua
+Core\Options.lua
+
+
+

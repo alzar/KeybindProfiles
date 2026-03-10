@@ -1,21 +1,46 @@
 # Keybind Profiles
-v1.0.0
 
-Keybind Profiles does exactly as it says, adds support for creating preset profiles for your keybinds. It has support for changing profiles based on spec, there's also exposed functions for changing profiles through other addons or WeakAuras.
+Retail Midnight rewrite of Keybind Profiles using Blizzard APIs only.
 
+## Features
 
-## How To Use
-Use of the addon is simple, create your profile and then modify your keybinds. From there manually save your profile in the addon config or enable autosave and the addon will automatically save any changes to keybinds to your currently active profile.
+- Account-wide named keybind profiles
+- Per-character active profile tracking
+- Specialization-based auto-loading
+- Optional autosave when bindings are saved through Blizzard UI
+- Profile import/export using shareable strings
+- Slash commands for manual control
 
-For loading profiles, there's several ways to do it.
-1. Through UI, select the profile you'd like to load (Or additionally setup profiles to be loaded per-spec)
-2. Through slash command; `/kbp load <profilename>`
-3. Through code; `KeybindProfiles:Load(<profilename>)`
+## UI
 
-__*NOTE*__: By default, the behavior to save profiles anytime keybinds are saved is disabled which means you would need to manually save your profile in the addon config (/kbp config). You can enable autosaving, there is no issues with it, but if you use lower-end specs you may experience a small bit of lag.
+- `/kbp` opens the addon's standalone configuration window
+- Saved profile rows support inline load/save actions, delete with confirmation, and an active-profile indicator icon
+- The `Saved Profiles` header supports create, export, and import actions
 
-## Compatibility
-This addon has been verified to work with default Blizzard action bars, Bartender4, and ElvUI. Anything outside of these addons is a use at your own risk.
+## Slash Commands
 
-## Contribute
-This addon is fully open source, can find the source [here](https://github.com/Alzar/KeybindProfiles)
+- `/kbp` or `/kbp config` opens settings
+- `/kbp load <profile>`
+- `/kbp save`
+- `/kbp saveas <profile>`
+- `/kbp list`
+- `/kbp status`
+- `/kbp help`
+
+## Addon API
+
+- `KeybindProfiles:LoadProfile(name, opts)`
+- `KeybindProfiles:SaveProfile(name)`
+- `KeybindProfiles:SaveAsProfile(name)`
+- `KeybindProfiles:ListProfiles()`
+- `KeybindProfiles:GetActiveProfileName()`
+- `KeybindProfiles:EvaluateRules(reason, force)`
+- `KeybindProfiles:ExportProfile(name)`
+- `KeybindProfiles:ImportProfile(text, overrideName)`
+- `KeybindProfiles:Load(name)` compatibility alias
+
+## Notes
+
+- The addon operates on the currently selected Blizzard binding set returned by `GetCurrentBindingSet()`.
+- Auto-loading currently ships with specialization rules, but the rule schema is designed for future conditions like instance type and difficulty.
+- Importing creates a new profile from the pasted string and applies it immediately. If the chosen or exported name already exists, the addon creates a unique imported name instead of overwriting.

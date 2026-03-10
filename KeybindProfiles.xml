@@ -1,5 +1,0 @@
-<Ui xmlns='http://www.blizzard.com/wow/ui/'>
-	<Include file='Core\Options.lua'/>
-	<Include file='Core\Commands.lua'/>
-	<Include file='Core\Core.lua'/>
-</Ui>

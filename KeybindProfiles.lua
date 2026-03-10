@@ -1,12 +1,36 @@
-CLASSIC_VERSION = "30400"
+local ADDON_NAME, NS = ...
 
-KeybindProfiles = LibStub("AceAddon-3.0"):NewAddon("KeybindProfiles", "AceConsole-3.0", "AceEvent-3.0", "AceTimer-3.0")
-AceConfigDialog = LibStub("AceConfigDialog-3.0")
-KeybindProfiles.Title = GetAddOnMetadata("KeybindProfiles", "Title")
-KeybindProfiles.Author = GetAddOnMetadata("KeybindProfiles", "Author")
-KeybindProfiles.Version = GetAddOnMetadata("KeybindProfiles", "Version")
-KeybindProfiles.Locale = LibStub("AceLocale-3.0"):GetLocale("KeybindProfiles")
-KeybindProfiles.GUI = LibStub("AceGUI-3.0")
-KeybindProfiles.IsClassic = GetAddOnMetadata("KeybindProfiles", "Interface") == CLASSIC_VERSION
+local KeybindProfiles = {}
+NS.KeybindProfiles = KeybindProfiles
+_G.KeybindProfiles = KeybindProfiles
 
-KeybindProfiles:SetDefaultModuleState(false)
+KeybindProfiles.NAME = ADDON_NAME
+KeybindProfiles.VERSION = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Version") or "0.0.0"
+KeybindProfiles.DISPLAY_NAME = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title") or ADDON_NAME
+KeybindProfiles.L = NS.L or {}
+
+function KeybindProfiles:FormatMessage(message)
+    return string.format("|cff33ff99%s|r: %s", self.DISPLAY_NAME, tostring(message))
+end
+
+function KeybindProfiles:Print(message)
+    if DEFAULT_CHAT_FRAME and DEFAULT_CHAT_FRAME.AddMessage then
+        DEFAULT_CHAT_FRAME:AddMessage(self:FormatMessage(message))
+    else
+        print(self:FormatMessage(message))
+    end
+end
+
+function KeybindProfiles:Notify(message)
+    if self.db and self.db.global and self.db.global.notifications == false then
+        return
+    end
+
+    self:Print(message)
+end
+
+function KeybindProfiles:RefreshOptions()
+    if self.optionsPanel and self.optionsPanel.Refresh then
+        self.optionsPanel:Refresh()
+    end
+end
