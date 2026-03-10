@@ -1,21 +1,8 @@
 # Keybind Profiles
 
-Retail Midnight rewrite of Keybind Profiles using Blizzard APIs only.
+Addon that allows creating keybind profiles and assigning them to specs for auto-loading. Also has suitable API for both commands & programatically working with your keybind profilesz.
 
-## Features
-
-- Account-wide named keybind profiles
-- Per-character active profile tracking
-- Specialization-based auto-loading
-- Optional autosave when bindings are saved through Blizzard UI
-- Profile import/export using shareable strings
-- Slash commands for manual control
-
-## UI
-
-- `/kbp` opens the addon's standalone configuration window
-- Saved profile rows support inline load/save actions, delete with confirmation, and an active-profile indicator icon
-- The `Saved Profiles` header supports create, export, and import actions
+__NOTE:__ This addon has been rewritten for Midnight and support for classic has been dropped as I am no longer playing Classic.
 
 ## Slash Commands
 
@@ -39,7 +26,7 @@ Retail Midnight rewrite of Keybind Profiles using Blizzard APIs only.
 - `KeybindProfiles:ImportProfile(text, overrideName)`
 - `KeybindProfiles:Load(name)` compatibility alias
 
-## Notes
+## Additional Info
 
 - The addon operates on the currently selected Blizzard binding set returned by `GetCurrentBindingSet()`.
 - Auto-loading currently ships with specialization rules, but the rule schema is designed for future conditions like instance type and difficulty.
