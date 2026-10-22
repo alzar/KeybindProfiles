@@ -2,8 +2,8 @@
 ## Version: 2.0.0
 ## Author: Alzar
 ## Category: Utilities
-## Interface: 120100
-## X-Interface: 120100
+## Interface: 120105
+## X-Interface: 120105
 ## Notes: Create named keybind profiles with specialization-based auto loading
 ## SavedVariables: KeybindProfilesDB, BindProfilesDB_Global
 ## IconTexture: Interface\ICONS\ability_bastion_druid.tga
