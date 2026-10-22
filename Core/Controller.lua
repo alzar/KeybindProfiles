@@ -54,6 +54,53 @@ function KeybindProfiles:EnsureQuickKeybindHook()
 	return true
 end
 
+function KeybindProfiles:GetElvUIActionBarsModule()
+	local elvUI = _G.ElvUI
+	if type(elvUI) ~= "table" then
+		return nil
+	end
+
+	local engine = unpack(elvUI)
+	if not engine or type(engine.GetModule) ~= "function" then
+		return nil
+	end
+
+	if not (engine.private and engine.private.actionbar and engine.private.actionbar.enable) then
+		return nil
+	end
+
+	local ok, actionBars = pcall(engine.GetModule, engine, "ActionBars")
+	if not ok or not actionBars or type(actionBars.ActivateBindMode) ~= "function" then
+		return nil
+	end
+
+	return actionBars
+end
+
+function KeybindProfiles:IsElvUIKeybindModeAvailable()
+	return self:GetElvUIActionBarsModule() ~= nil
+end
+
+function KeybindProfiles:OpenSlashKeybindMode()
+	local actionBars = self:GetElvUIActionBarsModule()
+	if actionBars then
+		if InCombatLockdown() then
+			self:Print(L.error_keybind_mode_combat)
+			return false
+		end
+
+		if SettingsPanel and SettingsPanel.IsShown and SettingsPanel:IsShown() then
+			HideUIPanel(SettingsPanel)
+		end
+
+		self:CloseSettings()
+		actionBars:ActivateBindMode()
+		return true
+	end
+
+	return self:OpenQuickKeybindMode()
+end
+
 function KeybindProfiles:ScheduleRuleEvaluation(reason, delay)
 	self.scheduledEvaluations = self.scheduledEvaluations or {}
 

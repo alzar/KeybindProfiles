@@ -12,9 +12,11 @@ local function ParseCommand(message)
 	return string.lower(command or ""), argument or ""
 end
 
-SLASH_KBP_QUICKBINDS1 = "/kb"
-SlashCmdList.KBP_QUICKBINDS = function(message)
-	KeybindProfiles:OpenQuickKeybindMode()
+if not KeybindProfiles:IsElvUIKeybindModeAvailable() then
+	SLASH_KBP_QUICKBINDS1 = "/kb"
+	SlashCmdList.KBP_QUICKBINDS = function(message)
+		KeybindProfiles:OpenSlashKeybindMode()
+	end
 end
 
 SLASH_KEYBINDPROFILES1 = "/kbp"
